@@ -21,7 +21,9 @@ namespace DBTargetQuiz.Repository
 
         public async Task<Quiz?> GetByIdAsync(int id)
         {
-            return await _context.Set<Quiz>().FindAsync(id);
+            return await _context.Set<Quiz>()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(q => q.QuizId == id);
         }
 
         public async Task AddAsync(Quiz entity)

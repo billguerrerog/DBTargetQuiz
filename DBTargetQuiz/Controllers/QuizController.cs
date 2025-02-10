@@ -80,9 +80,16 @@ namespace DBTargetQuiz.Controllers
             }
 
             await _quizService.CalculateMatchingCandidates(quiz.QuizId);
-            var candidate = (await _quizService.GetByIdAsync(quiz.QuizId))?.Candidate1Id;
+            var updatedQuiz = await _quizService.GetByIdAsync(quiz.QuizId);
+            updatedQuiz = await _quizService.GetByIdAsync(quiz.QuizId);
 
-            return View("Result", candidate != null ? await _candidateService.GetByIdAsync(candidate.Value) : null);
+            if (updatedQuiz?.Candidate1Id.HasValue == true)
+            {
+                var candidate = await _candidateService.GetByIdAsync(updatedQuiz.Candidate1Id.Value);
+                return View("Result", candidate);
+            }
+
+            return View("Result", null);
         }
 
         public IActionResult Result()
