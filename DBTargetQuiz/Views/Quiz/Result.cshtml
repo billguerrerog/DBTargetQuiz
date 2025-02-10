@@ -4,29 +4,37 @@
     ViewData["Title"] = "Resultado del Cuestionario";
 }
 
-<h2>En base a tus respuestas, sugerimos el siguiente candidato:</h2>
+<h2 class="text-center mb-4">En base a tus respuestas, sugerimos el siguiente candidato:</h2>
 
 @if (Model != null)
 {
-    <div class="card mt-4">
-        <div class="card-body text-center">
-            <h3 class="card-title">@Model.Name</h3>
+    <div class="d-flex justify-content-center">
+        <div class="card shadow-lg border-0" style="max-width: 500px;">
+            <div class="card-body text-center p-4">
+                <h3 class="card-title fw-bold">@Model.Name</h3>
 
-            @if (!string.IsNullOrEmpty(Model.Picture))
-            {
-                <img src="@Model.Picture" alt="Foto del candidato" class="img-fluid rounded" />
-            }
+                @if (!string.IsNullOrEmpty(Model.Picture))
+                {
+                    <img src="~/images/@Model.Picture" alt="Foto del candidato"
+                         class="img-fluid rounded shadow-sm my-3"
+                         style="max-width: 200px;" />
+                }
 
-            <p><strong>Grupo:</strong> @Model.Group</p>
-            <p><strong>Edad:</strong> @Model.Age</p>
-            <p><strong>Profesión:</strong> @Model.Profession</p>
-            <p><strong>Posición:</strong> @Model.Position</p>
-            <p><strong>Plan de Gobierno:</strong> @Model.GovPlan</p>
-            <p><strong>Propuesta:</strong> @Model.Proposal</p>
+                <ul class="list-group list-group-flush text-start">
+                    <li class="list-group-item"><strong>Grupo:</strong> <span class="text-muted">@Model.Group</span></li>
+                    <li class="list-group-item"><strong>Edad:</strong> <span class="text-muted">@Model.Age años</span></li>
+                    <li class="list-group-item"><strong>Profesión:</strong> <span class="text-muted">@Model.Profession</span></li>
+                    <li class="list-group-item"><strong>Posición:</strong> <span class="text-muted">@Model.Position</span></li>
+                    <li class="list-group-item"><strong>Plan de Gobierno:</strong> <span class="text-muted">@Model.GovPlan</span></li>
+                    <li class="list-group-item"><strong>Propuesta:</strong> <span class="text-muted">@Model.Proposal</span></li>
+                </ul>
+
+                <a asp-action="Index" class="btn btn-primary mt-3">Volver al Cuestionario</a>
+            </div>
         </div>
     </div>
 }
 else
 {
-    <p>No se encontró un candidato sugerido.</p>
+    <p class="text-center text-danger">No se encontró un candidato sugerido.</p>
 }
