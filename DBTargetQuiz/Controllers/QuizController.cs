@@ -81,7 +81,6 @@ namespace DBTargetQuiz.Controllers
 
             await _quizService.CalculateMatchingCandidates(quiz.QuizId);
             var updatedQuiz = await _quizService.GetByIdAsync(quiz.QuizId);
-            updatedQuiz = await _quizService.GetByIdAsync(quiz.QuizId);
 
             if (updatedQuiz?.Candidate1Id.HasValue == true)
             {
