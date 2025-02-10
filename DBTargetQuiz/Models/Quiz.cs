@@ -22,7 +22,7 @@ namespace DBTargetQuiz.Models
 
         [MaxLength(50)]
         [Column("quiz_client_ip")]
-        public string ClientIp { get; set; }
+        public string? ClientIp { get; set; }
 
         [Column("quiz_status")]
         public short Status { get; set; }

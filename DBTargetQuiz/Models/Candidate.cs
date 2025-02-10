@@ -37,7 +37,7 @@ namespace DBTargetQuiz.Models
 
         [Column("candidate_proposal")]
         [MaxLength(200)]
-        public string Proposal { get; set; }
+        public string? Proposal { get; set; }
 
         [Column("candidate_picture")]
         [MaxLength(50)]
