@@ -1,0 +1,36 @@
+﻿@model List<DBTargetQuiz.Models.DTOs.QuizViewModel>
+
+@{
+    ViewData["Title"] = "Cuestionario";
+}
+
+<h2>Responde el cuestionario</h2>
+
+<form asp-action="SubmitQuiz" method="post">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="question mb-4">
+            <h4>@Model[i].QuestionDescription</h4>
+
+            @if (!string.IsNullOrEmpty(Model[i].QuestionPicture))
+            {
+                <img src="@Model[i].QuestionPicture" alt="Imagen de la pregunta" class="img-fluid rounded mb-2" />
+            }
+
+            <div class="form-group">
+                <label for="userAnswers[@i].SelectedAnswerId">Selecciona una respuesta:</label>
+                <select class="form-control" name="userAnswers[@i].SelectedAnswerId" required>
+                    <option value="">-- Selecciona una opción --</option>
+                    @foreach (var answer in Model[i].Answers)
+                    {
+                        <option value="@answer.AnswerId">@answer.Description</option>
+                    }
+                </select>
+            </div>
+
+            <input type="hidden" name="userAnswers[@i].QuestionId" value="@Model[i].QuestionId" />
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
